@@ -33,7 +33,7 @@ from bot.helper.telegram_helper.message_utils import (
 )
 
 handler_dict = {}
-no_thumb = "https://graph.org/file/73ae908d18c6b38038071.jpg"
+no_thumb = "https://ibb.co/yntKnnYc"
 
 leech_options = [
     "THUMBNAIL",
@@ -96,9 +96,9 @@ async def get_user_settings(from_user, stype="main"):
     thumbnail = thumbpath if await aiopath.exists(thumbpath) else no_thumb
 
     if stype == "leech":
-        buttons.data_button("Thumbnail", f"userset {user_id} menu THUMBNAIL")
+        buttons.data_button("📸 Thumbnail", f"userset {user_id} menu THUMBNAIL")
         buttons.data_button(
-            "Leech Prefix",
+            "⛅ Leech Prefix",
             f"userset {user_id} menu LEECH_FILENAME_PREFIX",
         )
         if user_dict.get("LEECH_FILENAME_PREFIX", False):
@@ -110,7 +110,7 @@ async def get_user_settings(from_user, stype="main"):
         else:
             lprefix = "None"
         buttons.data_button(
-            "Leech Suffix",
+            "🔚 Leech Suffix",
             f"userset {user_id} menu LEECH_SUFFIX",
         )
         if user_dict.get("LEECH_SUFFIX", False):
@@ -121,7 +121,7 @@ async def get_user_settings(from_user, stype="main"):
             lsuffix = "None"
 
         buttons.data_button(
-            "Leech Font",
+            "🔤 Leech Font",
             f"userset {user_id} menu LEECH_FONT",
         )
         if user_dict.get("LEECH_FONT", False):
@@ -132,7 +132,7 @@ async def get_user_settings(from_user, stype="main"):
             lfont = "None"
 
         buttons.data_button(
-            "Leech Filename",
+            "📄 Leech Filename",
             f"userset {user_id} menu LEECH_FILENAME",
         )
         if user_dict.get("LEECH_FILENAME", False):
@@ -143,7 +143,7 @@ async def get_user_settings(from_user, stype="main"):
             lfilename = "None"
 
         buttons.data_button(
-            "Leech Caption",
+            "💬 Leech Caption",
             f"userset {user_id} menu LEECH_FILENAME_CAPTION",
         )
         if user_dict.get("LEECH_FILENAME_CAPTION", False):
@@ -156,7 +156,7 @@ async def get_user_settings(from_user, stype="main"):
         else:
             lcap = "None"
         buttons.data_button(
-            "User Dump",
+            "📊 User Dump",
             f"userset {user_id} menu USER_DUMP",
         )
         if user_dict.get("USER_DUMP", False):
@@ -164,12 +164,12 @@ async def get_user_settings(from_user, stype="main"):
         else:
             udump = "None"
         buttons.data_button(
-            "User Session",
+            "🖥️ User Session",
             f"userset {user_id} menu USER_SESSION",
         )
         usess = "added" if user_dict.get("USER_SESSION", False) else "None"
         buttons.data_button(
-            "Leech Split Size",
+            "🔪 Leech Split Size",
             f"userset {user_id} menu LEECH_SPLIT_SIZE",
         )
         # Handle LEECH_SPLIT_SIZE, ensuring it's an integer
@@ -186,7 +186,7 @@ async def get_user_settings(from_user, stype="main"):
         else:
             lsplit = "None"
         buttons.data_button(
-            "Equal Splits",
+            "⚖️ Equal Splits",
             f"userset {user_id} tog EQUAL_SPLITS {'f' if user_dict.get('EQUAL_SPLITS', False) or ('EQUAL_SPLITS' not in user_dict and Config.EQUAL_SPLITS) else 't'}",
         )
         if user_dict.get("AS_DOCUMENT", False) or (
@@ -194,31 +194,31 @@ async def get_user_settings(from_user, stype="main"):
         ):
             ltype = "DOCUMENT"
             buttons.data_button(
-                "Send As Media",
+                "🎥 Send As Media",
                 f"userset {user_id} tog AS_DOCUMENT f",
             )
         else:
             ltype = "MEDIA"
             buttons.data_button(
-                "Send As Document",
+                "📄 Send As Document",
                 f"userset {user_id} tog AS_DOCUMENT t",
             )
         if user_dict.get("MEDIA_GROUP", False) or (
             "MEDIA_GROUP" not in user_dict and Config.MEDIA_GROUP
         ):
             buttons.data_button(
-                "Disable Media Group",
+                "🚫 Disable Media Group",
                 f"userset {user_id} tog MEDIA_GROUP f",
             )
             media_group = "Enabled"
         else:
             buttons.data_button(
-                "Enable Media Group",
+                "✅ Enable Media Group",
                 f"userset {user_id} tog MEDIA_GROUP t",
             )
             media_group = "Disabled"
         buttons.data_button(
-            "Thumbnail Layout",
+            "🖼️ Thumbnail Layout",
             f"userset {user_id} menu THUMBNAIL_LAYOUT",
         )
         if user_dict.get("THUMBNAIL_LAYOUT", False):
@@ -228,8 +228,8 @@ async def get_user_settings(from_user, stype="main"):
         else:
             thumb_layout = "None"
 
-        buttons.data_button("Back", f"userset {user_id} back")
-        buttons.data_button("Close", f"userset {user_id} close")
+        buttons.data_button("🔙", f"userset {user_id} back")
+        buttons.data_button("❌", f"userset {user_id} close")
 
         # Determine Equal Splits status
         equal_splits_status = (
@@ -256,7 +256,7 @@ async def get_user_settings(from_user, stype="main"):
                 lsplit_display = "None"
 
         text = f"""<u><b>Leech Settings for {name}</b></u>
--> Leech Type: <b>{ltype}</b>
+<blockquote>-> Leech Type: <b>{ltype}</b>
 -> Media Group: <b>{media_group}</b>
 -> Leech Prefix: <code>{escape(lprefix)}</code>
 -> Leech Suffix: <code>{escape(lsuffix)}</code>
@@ -267,17 +267,17 @@ async def get_user_settings(from_user, stype="main"):
 -> User Dump: <code>{udump}</code>
 -> Thumbnail Layout: <b>{thumb_layout}</b>
 -> Leech Split Size: <b>{lsplit_display}</b>
--> Equal Splits: <b>{equal_splits_status}</b>
+-> Equal Splits: <b>{equal_splits_status}</b></blockquote>
 """
     elif stype == "rclone":
-        buttons.data_button("Rclone Config", f"userset {user_id} menu RCLONE_CONFIG")
+        buttons.data_button("☁️ Rclone Config", f"userset {user_id} menu RCLONE_CONFIG")
         buttons.data_button(
             "Default Rclone Path",
             f"userset {user_id} menu RCLONE_PATH",
         )
-        buttons.data_button("Rclone Flags", f"userset {user_id} menu RCLONE_FLAGS")
-        buttons.data_button("Back", f"userset {user_id} back")
-        buttons.data_button("Close", f"userset {user_id} close")
+        buttons.data_button("🏁 Rclone Flags", f"userset {user_id} menu RCLONE_FLAGS")
+        buttons.data_button("🔙", f"userset {user_id} back")
+        buttons.data_button("❌", f"userset {user_id} close")
         rccmsg = "Exists" if await aiopath.exists(rclone_conf) else "Not Exists"
         if "RCLONE_PATH" in user_dict:
             rccpath = user_dict["RCLONE_PATH"]
@@ -300,33 +300,33 @@ async def get_user_settings(from_user, stype="main"):
             else f"Path: <code>{rccpath}</code>"
         )
         text = f"""<u><b>Rclone Settings for {name}</b></u>
--> Rclone Config : <b>{rccmsg}</b>
+<blockquote>-> Rclone Config : <b>{rccmsg}</b>
 -> Rclone {path_display}
--> Rclone Flags   : <code>{rcflags}</code>
+-> Rclone Flags   : <code>{rcflags}</code></blockquote>
 
 <blockquote>Dont understand? Then follow this <a href='https://t.me/aimupdate/215'>quide</a></blockquote>
 
 """
     elif stype == "gdrive":
-        buttons.data_button("token.pickle", f"userset {user_id} menu TOKEN_PICKLE")
-        buttons.data_button("Default Gdrive ID", f"userset {user_id} menu GDRIVE_ID")
-        buttons.data_button("Index URL", f"userset {user_id} menu INDEX_URL")
+        buttons.data_button("🔑 token.pickle", f"userset {user_id} menu TOKEN_PICKLE")
+        buttons.data_button("🗂️ Default Gdrive ID", f"userset {user_id} menu GDRIVE_ID")
+        buttons.data_button("🌐 Index URL", f"userset {user_id} menu INDEX_URL")
         if user_dict.get("STOP_DUPLICATE", False) or (
             "STOP_DUPLICATE" not in user_dict and Config.STOP_DUPLICATE
         ):
             buttons.data_button(
-                "Disable Stop Duplicate",
+                "🚫 Disable Stop Duplicate",
                 f"userset {user_id} tog STOP_DUPLICATE f",
             )
             sd_msg = "Enabled"
         else:
             buttons.data_button(
-                "Enable Stop Duplicate",
+                "✅ Enable Stop Duplicate",
                 f"userset {user_id} tog STOP_DUPLICATE t",
             )
             sd_msg = "Disabled"
-        buttons.data_button("Back", f"userset {user_id} back")
-        buttons.data_button("Close", f"userset {user_id} close")
+        buttons.data_button("🔙", f"userset {user_id} back")
+        buttons.data_button("❌", f"userset {user_id} close")
         tokenmsg = "Exists" if await aiopath.exists(token_pickle) else "Not Exists"
         if user_dict.get("GDRIVE_ID", False):
             gdrive_id = user_dict["GDRIVE_ID"]
@@ -338,10 +338,10 @@ async def get_user_settings(from_user, stype="main"):
             user_dict["INDEX_URL"] if user_dict.get("INDEX_URL", False) else "None"
         )
         text = f"""<u><b>Gdrive API Settings for {name}</b></u>
--> Gdrive Token: <b>{tokenmsg}</b>
+<blockquote>-> Gdrive Token: <b>{tokenmsg}</b>
 -> Gdrive ID: <code>{gdrive_id}</code>
 -> Index URL: <code>{index}</code>
--> Stop Duplicate: <b>{sd_msg}</b>"""
+-> Stop Duplicate: <b>{sd_msg}</b></blockquote>"""
     elif stype == "ai":
         # Add buttons for each AI setting
         for option in ai_options:
@@ -350,9 +350,9 @@ async def get_user_settings(from_user, stype="main"):
                 f"userset {user_id} menu {option}",
             )
 
-        buttons.data_button("Reset AI Settings", f"userset {user_id} reset ai")
-        buttons.data_button("Back", f"userset {user_id} back")
-        buttons.data_button("Close", f"userset {user_id} close")
+        buttons.data_button("🔄 Reset AI Settings", f"userset {user_id} reset ai")
+        buttons.data_button("🔙", f"userset {user_id} back")
+        buttons.data_button("❌", f"userset {user_id} close")
 
         # Get current AI settings
         default_ai = user_dict.get(
@@ -378,21 +378,18 @@ async def get_user_settings(from_user, stype="main"):
         text = f"""<u><b>AI Settings for {name}</b></u>
 <b>Default AI Provider:</b> <code>{default_ai}</code>
 
-<b>Mistral AI:</b>
+<blockquote><b>Mistral AI:</b>
 -> API Key: <b>{mistral_api_key}</b>
--> API URL: <code>{mistral_api_url}</code>
-
-<b>DeepSeek AI:</b>
+-> API URL: <code>{mistral_api_url}</code></blockquote>
+<blockquote><b>DeepSeek AI:</b>
 -> API Key: <b>{deepseek_api_key}</b>
--> API URL: <code>{deepseek_api_url}</code>
-
-<b>ChatGPT:</b>
+-> API URL: <code>{deepseek_api_url}</code></blockquote>
+<blockquote><b>ChatGPT:</b>
 -> API Key: <b>{chatgpt_api_key}</b>
--> API URL: <code>{chatgpt_api_url}</code>
-
-<b>Gemini AI:</b>
+-> API URL: <code>{chatgpt_api_url}</code></blockquote>
+<blockquote><b>Gemini AI:</b>
 -> API Key: <b>{gemini_api_key}</b>
--> API URL: <code>{gemini_api_url}</code>
+-> API URL: <code>{gemini_api_url}</code></blockquote>
 
 <i>Note: For each AI provider, configure either API Key or API URL. If both are set, API Key will be used first with fallback to API URL.</i>
 <i>Your settings will take priority over the bot owner's settings.</i>
@@ -400,63 +397,40 @@ async def get_user_settings(from_user, stype="main"):
 """
 
     elif stype == "convert":
-        buttons.data_button("Back", f"userset {user_id} back")
-        buttons.data_button("Close", f"userset {user_id} close")
+        buttons.data_button("🔙", f"userset {user_id} back")
+        buttons.data_button("❌", f"userset {user_id} close")
 
         text = f"""<u><b>Convert Settings for {name}</b></u>
-Convert settings have been moved to Media Tools settings.
+<blockquote>Convert settings have been moved to Media Tools settings.</blockquote>
 Please use /mediatools command to configure convert settings.
 """
 
     elif stype == "metadata":
         # Global metadata settings
-        buttons.data_button("Metadata All", f"userset {user_id} menu METADATA_ALL")
-        buttons.data_button("Global Title", f"userset {user_id} menu METADATA_TITLE")
-        buttons.data_button(
-            "Global Author", f"userset {user_id} menu METADATA_AUTHOR"
-        )
-        buttons.data_button(
-            "Global Comment", f"userset {user_id} menu METADATA_COMMENT"
-        )
-
+        buttons.data_button("📑 Metadata All", f"userset {user_id} menu METADATA_ALL")
+        buttons.data_button("🌍 Global Title", f"userset {user_id} menu METADATA_TITLE")
+        buttons.data_button("🖋️ Global Author", f"userset {user_id} menu METADATA_AUTHOR")
+        buttons.data_button("💬 Global Comment", f"userset {user_id} menu METADATA_COMMENT")
+        
         # Video metadata settings
-        buttons.data_button(
-            "Video Title", f"userset {user_id} menu METADATA_VIDEO_TITLE"
-        )
-        buttons.data_button(
-            "Video Author", f"userset {user_id} menu METADATA_VIDEO_AUTHOR"
-        )
-        buttons.data_button(
-            "Video Comment", f"userset {user_id} menu METADATA_VIDEO_COMMENT"
-        )
+        buttons.data_button("🎥 Video Title", f"userset {user_id} menu METADATA_VIDEO_TITLE")
+        buttons.data_button("👤 Video Author", f"userset {user_id} menu METADATA_VIDEO_AUTHOR")
+        buttons.data_button("📝 Video Comment", f"userset {user_id} menu METADATA_VIDEO_COMMENT")
 
         # Audio metadata settings
-        buttons.data_button(
-            "Audio Title", f"userset {user_id} menu METADATA_AUDIO_TITLE"
-        )
-        buttons.data_button(
-            "Audio Author", f"userset {user_id} menu METADATA_AUDIO_AUTHOR"
-        )
-        buttons.data_button(
-            "Audio Comment", f"userset {user_id} menu METADATA_AUDIO_COMMENT"
-        )
-
+        buttons.data_button("🎵 Audio Title", f"userset {user_id} menu METADATA_AUDIO_TITLE")
+        buttons.data_button("🎤 Audio Author", f"userset {user_id} menu METADATA_AUDIO_AUTHOR")
+        buttons.data_button("💬 Audio Comment", f"userset {user_id} menu METADATA_AUDIO_COMMENT")
+        
         # Subtitle metadata settings
-        buttons.data_button(
-            "Subtitle Title", f"userset {user_id} menu METADATA_SUBTITLE_TITLE"
-        )
-        buttons.data_button(
-            "Subtitle Author", f"userset {user_id} menu METADATA_SUBTITLE_AUTHOR"
-        )
-        buttons.data_button(
-            "Subtitle Comment", f"userset {user_id} menu METADATA_SUBTITLE_COMMENT"
-        )
+        buttons.data_button("🎬 Subtitle Title", f"userset {user_id} menu METADATA_SUBTITLE_TITLE")
+        buttons.data_button("📝 Subtitle Author", f"userset {user_id} menu METADATA_SUBTITLE_AUTHOR")
+        buttons.data_button("💬 Subtitle Comment", f"userset {user_id} menu METADATA_SUBTITLE_COMMENT")
+        
+        buttons.data_button("🔄 Reset All Metadata", f"userset {user_id} reset metadata_all")
 
-        buttons.data_button(
-            "Reset All Metadata", f"userset {user_id} reset metadata_all"
-        )
-        buttons.data_button("Back", f"userset {user_id} back")
-        buttons.data_button("Close", f"userset {user_id} close")
+        buttons.data_button("🔙", f"userset {user_id} back")
+        buttons.data_button("❌", f"userset {user_id} close")
 
         # Get metadata values
         metadata_all = user_dict.get("METADATA_ALL", "None")
@@ -485,36 +459,33 @@ Please use /mediatools command to configure convert settings.
         # metadata_key = user_dict.get("METADATA_KEY", "None")
 
         text = f"""<u><b>Metadata Settings for {name}</b></u>
-<b>Global Settings:</b>
+<blockquote><b>Global Settings:</b>
 -> Metadata All: <code>{metadata_all}</code>
 -> Global Title: <code>{metadata_title}</code>
 -> Global Author: <code>{metadata_author}</code>
--> Global Comment: <code>{metadata_comment}</code>
-
-<b>Video Track Settings:</b>
+-> Global Comment: <code>{metadata_comment}</code></blockquote>
+<blockquote><b>Video Track Settings:</b>
 -> Video Title: <code>{metadata_video_title}</code>
 -> Video Author: <code>{metadata_video_author}</code>
--> Video Comment: <code>{metadata_video_comment}</code>
-
-<b>Audio Track Settings:</b>
+-> Video Comment: <code>{metadata_video_comment}</code></blockquote>
+<blockquote><b>Audio Track Settings:</b>
 -> Audio Title: <code>{metadata_audio_title}</code>
 -> Audio Author: <code>{metadata_audio_author}</code>
--> Audio Comment: <code>{metadata_audio_comment}</code>
-
-<b>Subtitle Track Settings:</b>
+-> Audio Comment: <code>{metadata_audio_comment}</code></blockquote>
+<blockquote><b>Subtitle Track Settings:</b>
 -> Subtitle Title: <code>{metadata_subtitle_title}</code>
 -> Subtitle Author: <code>{metadata_subtitle_author}</code>
--> Subtitle Comment: <code>{metadata_subtitle_comment}</code>
+-> Subtitle Comment: <code>{metadata_subtitle_comment}</code></blockquote>
 
 <b>Note:</b> 'Metadata All' takes priority over all other settings when set."""
 
     else:
-        buttons.data_button("Leech", f"userset {user_id} leech")
-        buttons.data_button("Rclone", f"userset {user_id} rclone")
-        buttons.data_button("Gdrive API", f"userset {user_id} gdrive")
+        buttons.data_button("🦑 Leech", f"userset {user_id} leech")
+        buttons.data_button("☁️ Rclone", f"userset {user_id} rclone")
+        buttons.data_button("📂 Gdrive API", f"userset {user_id} gdrive")
         # Only show AI Settings button if Extra Modules are enabled
         if Config.ENABLE_EXTRA_MODULES:
-            buttons.data_button("AI Settings", f"userset {user_id} ai")
+            buttons.data_button("🤖 AI Settings", f"userset {user_id} ai")
 
         upload_paths = user_dict.get("UPLOAD_PATHS", {})
         if (
@@ -526,7 +497,7 @@ Please use /mediatools command to configure convert settings.
         else:
             upload_paths = "None"
 
-        buttons.data_button("Upload Paths", f"userset {user_id} menu UPLOAD_PATHS")
+        buttons.data_button("⬆️ Upload Paths", f"userset {user_id} menu UPLOAD_PATHS")
 
         if user_dict.get("DEFAULT_UPLOAD", ""):
             default_upload = user_dict["DEFAULT_UPLOAD"]
@@ -634,7 +605,7 @@ Please use /mediatools command to configure convert settings.
         if user_dict:
             buttons.data_button("Reset All", f"userset {user_id} reset all")
 
-        buttons.data_button("Close", f"userset {user_id} close")
+        buttons.data_button("❌", f"userset {user_id} close")
 
         # Get MediaInfo status for display
         mediainfo_enabled = user_dict.get("MEDIAINFO_ENABLED", None)
@@ -893,8 +864,8 @@ async def get_menu(option, message, user_id):
         back_to = "back"  # Go back to main menu
     else:
         back_to = "back"
-    buttons.data_button("Back", f"userset {user_id} {back_to}")
-    buttons.data_button("Close", f"userset {user_id} close")
+    buttons.data_button("🔙", f"userset {user_id} {back_to}")
+    buttons.data_button("❌", f"userset {user_id} close")
     text = (
         f"Edit menu for: {option}\n\nUse /help1, /help2, /help3... for more details."
     )
@@ -991,8 +962,8 @@ You can provide your own cookies for YouTube and other yt-dlp downloads to acces
 - Download private videos (if you have access)
 
 <b>Note:</b> Your cookies are stored securely and only used for your downloads. The bot owner cannot access your account."""
-        buttons.data_button("Back", f"userset {user_id} menu {data[3]}")
-        buttons.data_button("Close", f"userset {user_id} close")
+        buttons.data_button("🔙", f"userset {user_id} menu {data[3]}")
+        buttons.data_button("❌", f"userset {user_id} close")
         await edit_message(message, text, buttons.build_menu(2))
     elif data[2] == "file":
         await query.answer()
@@ -1005,8 +976,8 @@ You can provide your own cookies for YouTube and other yt-dlp downloads to acces
             text = "Send your cookies.txt file for YouTube and other yt-dlp downloads. Create it using browser extensions like 'Get cookies.txt' or 'EditThisCookie'. Timeout: 60 sec"
         else:
             text = "Send token.pickle. Timeout: 60 sec"
-        buttons.data_button("Back", f"userset {user_id} setevent")
-        buttons.data_button("Close", f"userset {user_id} close")
+        buttons.data_button("🔙", f"userset {user_id} setevent")
+        buttons.data_button("❌", f"userset {user_id} close")
         await edit_message(message, text, buttons.build_menu(1))
         pfunc = partial(add_file, ftype=data[3])
         await event_handler(
@@ -1036,8 +1007,8 @@ You can provide your own cookies for YouTube and other yt-dlp downloads to acces
             )
             buttons.data_button("ChatGPT", f"userset {user_id} setprovider chatgpt")
             buttons.data_button("Gemini", f"userset {user_id} setprovider gemini")
-            buttons.data_button("Back", f"userset {user_id} setevent")
-            buttons.data_button("Close", f"userset {user_id} close")
+            buttons.data_button("🔙", f"userset {user_id} setevent")
+            buttons.data_button("❌", f"userset {user_id} close")
 
             edit_msg = await edit_message(
                 message,
@@ -1061,8 +1032,8 @@ You can provide your own cookies for YouTube and other yt-dlp downloads to acces
         elif data[2] == "rmone":
             text = f"Remove one or more key from {data[3]}. Example: key 1/key2/key 3. Timeout: 60 sec"
             func = remove_one
-        buttons.data_button("Back", f"userset {user_id} setevent")
-        buttons.data_button("Close", f"userset {user_id} close")
+        buttons.data_button("🔙", f"userset {user_id} setevent")
+        buttons.data_button("❌", f"userset {user_id} close")
         edit_msg = await edit_message(message, text, buttons.build_menu(1))
         create_task(  # noqa: RUF006
             auto_delete_message(edit_msg, time=300),
