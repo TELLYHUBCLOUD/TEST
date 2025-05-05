@@ -262,23 +262,23 @@ async def get_buttons(key=None, edit_type=None, page=0, user_id=None):
     if key is None:
         from bot.helper.ext_utils.bot_utils import is_media_tool_enabled
 
-        buttons.data_button("Config", "botset var")
-        buttons.data_button("Pvt Files", "botset private")
+        buttons.data_button("⚙️ Config", "botset var")
+        buttons.data_button("🔒 Pvt Files", "botset private")
 
         # Only show Media Tools button if media tools are enabled
         if is_media_tool_enabled("mediatools"):
-            buttons.data_button("Media Tools", "botset mediatools")
+            buttons.data_button("🎬 Media Tools",  "botset mediatools")
 
         # Only show AI Settings button if Extra Modules are enabled
         if Config.ENABLE_EXTRA_MODULES:
-            buttons.data_button("AI Settings", "botset ai")
+            buttons.data_button("🤖 AI Settings", "botset ai")
 
-        buttons.data_button("Task Monitor", "botset taskmonitor")
-        buttons.data_button("Qbit Settings", "botset qbit")
-        buttons.data_button("Aria2c Settings", "botset aria")
-        buttons.data_button("Sabnzbd", "botset nzb")
-        buttons.data_button("JD Sync", "botset syncjd")
-        buttons.data_button("Close", "botset close")
+        buttons.data_button("📊 Task Monitor", "botset taskmonitor")
+        buttons.data_button("⚙️ Qbit Settings", "botset qbit")
+        buttons.data_button("🖥️ Aria2c Settings", "botset aria")
+        buttons.data_button("📥 Sabnzbd", "botset nzb")
+        buttons.data_button("🔄 JD Sync", "botset syncjd")
+        buttons.data_button("❌", "botset close")
         msg = "Bot Settings:"
     elif edit_type is not None:
         if edit_type == "editvar" and (
@@ -298,25 +298,25 @@ async def get_buttons(key=None, edit_type=None, page=0, user_id=None):
             if key.startswith(
                 ("WATERMARK_", "AUDIO_WATERMARK_", "SUBTITLE_WATERMARK_")
             ):
-                buttons.data_button("Back", "botset mediatools_watermark")
+                buttons.data_button("🔙", "botset mediatools_watermark")
             elif key.startswith("METADATA_"):
-                buttons.data_button("Back", "botset mediatools_metadata")
+                buttons.data_button("🔙", "botset mediatools_metadata")
             elif key.startswith("TRIM_"):
-                buttons.data_button("Back", "botset mediatools_trim")
+                buttons.data_button("🔙", "botset mediatools_trim")
             elif key.startswith("COMPRESSION_"):
-                buttons.data_button("Back", "botset mediatools_compression")
+                buttons.data_button("🔙", "botset mediatools_compression")
             elif key.startswith("CONVERT_"):
-                buttons.data_button("Back", "botset mediatools_convert")
+                buttons.data_button("🔙", "botset mediatools_convert")
             elif key.startswith("TASK_MONITOR_"):
-                buttons.data_button("Back", "botset taskmonitor")
+                buttons.data_button("🔙", "botset taskmonitor")
             elif key.startswith("MISTRAL_"):
-                buttons.data_button("Back", "botset ai")
+                buttons.data_button("🔙", "botset ai")
             elif key.startswith("MERGE_") and "MERGE_OUTPUT_FORMAT" in key:
                 # If it's a format setting, it's likely from the merge_config menu
-                buttons.data_button("Back", "botset mediatools_merge_config")
+                buttons.data_button("🔙", "botset mediatools_merge_config")
             else:
-                buttons.data_button("Back", "botset mediatools_merge")
-            buttons.data_button("Close", "botset close")
+                buttons.data_button("🔙", "botset mediatools_merge")
+            buttons.data_button("❌", "botset close")
 
             # Get help text for settings
             if key in {
@@ -610,10 +610,10 @@ async def get_buttons(key=None, edit_type=None, page=0, user_id=None):
             msg += f"{help_text}\n\nCurrent value is '{Config.get(key)}'. Timeout: 60 sec"
         elif edit_type == "botvar":
             msg = ""
-            buttons.data_button("Back", "botset var")
+            buttons.data_button("🔙", "botset var")
             if key not in ["TELEGRAM_HASH", "TELEGRAM_API", "OWNER_ID", "BOT_TOKEN"]:
-                buttons.data_button("Default", f"botset resetvar {key}")
-            buttons.data_button("Close", "botset close")
+                buttons.data_button("🔄", f"botset resetvar {key}")
+            buttons.data_button("❌", "botset close")
             if key in [
                 "CMD_SUFFIX",
                 "OWNER_ID",
@@ -646,32 +646,32 @@ async def get_buttons(key=None, edit_type=None, page=0, user_id=None):
 
             msg += f"Send a valid value for {key}. Current value is '{Config.get(key)}'. Timeout: 60 sec"
         elif edit_type == "ariavar":
-            buttons.data_button("Back", "botset aria")
+            buttons.data_button("🔙", "botset aria")
             if key != "newkey":
-                buttons.data_button("Empty String", f"botset emptyaria {key}")
-            buttons.data_button("Close", "botset close")
+                buttons.data_button("🗑️ Empty String", f"botset emptyaria {key}")
+            buttons.data_button("❌", "botset close")
             msg = (
                 "Send a key with value. Example: https-proxy-user:value. Timeout: 60 sec"
                 if key == "newkey"
                 else f"Send a valid value for {key}. Current value is '{aria2_options[key]}'. Timeout: 60 sec"
             )
         elif edit_type == "qbitvar":
-            buttons.data_button("Back", "botset qbit")
-            buttons.data_button("Empty", f"botset emptyqbit {key}")
-            buttons.data_button("Close", "botset close")
+            buttons.data_button("🔙", "botset qbit")
+            buttons.data_button("🗑️ Empty", f"botset emptyqbit {key}")
+            buttons.data_button("❌", "botset close")
             msg = f"Send a valid value for {key}. Current value is '{qbit_options[key]}'. Timeout: 60 sec"
         elif edit_type == "nzbvar":
-            buttons.data_button("Back", "botset nzb")
-            buttons.data_button("Default", f"botset resetnzb {key}")
-            buttons.data_button("Empty String", f"botset emptynzb {key}")
-            buttons.data_button("Close", "botset close")
+            buttons.data_button("🔙", "botset nzb")
+            buttons.data_button("🔄", f"botset resetnzb {key}")
+            buttons.data_button("🗑️ Empty String", f"botset emptynzb {key}")
+            buttons.data_button("❌", "botset close")
             msg = f"Send a valid value for {key}. Current value is '{nzb_options[key]}'.\nIf the value is list then separate them by space or ,\nExample: .exe,info or .exe .info\nTimeout: 60 sec"
         elif edit_type.startswith("nzbsevar"):
             index = 0 if key == "newser" else int(edit_type.replace("nzbsevar", ""))
-            buttons.data_button("Back", f"botset nzbser{index}")
+            buttons.data_button("🔙", f"botset nzbser{index}")
             if key != "newser":
                 buttons.data_button("Empty", f"botset emptyserkey {index} {key}")
-            buttons.data_button("Close", "botset close")
+            buttons.data_button("❌", "botset close")
             if key == "newser":
                 msg = "Send one server as dictionary {}, like in config.py without []. Timeout: 60 sec"
             else:
@@ -818,11 +818,11 @@ async def get_buttons(key=None, edit_type=None, page=0, user_id=None):
             else:
                 buttons.data_button(k, f"botset botvar {k}")
         if state == "view":
-            buttons.data_button("Edit", "botset edit var")
+            buttons.data_button("✏️", "botset edit var")
         else:
-            buttons.data_button("View", "botset view var")
-        buttons.data_button("Back", "botset back")
-        buttons.data_button("Close", "botset close")
+            buttons.data_button("👁️", "botset view var")
+        buttons.data_button("🔙", "botset back")
+        buttons.data_button("❌", "botset close")
         for x in range(0, len(filtered_keys), 10):
             buttons.data_button(
                 f"{int(x / 10)}",
@@ -832,8 +832,8 @@ async def get_buttons(key=None, edit_type=None, page=0, user_id=None):
 
         msg = f"Config Variables | Page: {int(start / 10)} | State: {state}"
     elif key == "private":
-        buttons.data_button("Back", "botset back")
-        buttons.data_button("Close", "botset close")
+        buttons.data_button("🔙", "botset back")
+        buttons.data_button("❌", "botset close")
         msg = """Send private file: config.py, token.pickle, rclone.conf, accounts.zip, list_drives.txt, cookies.txt, .netrc or any other private file!
 To delete private file send only the file name as text message.
 Note: Changing .netrc will not take effect for aria2c until restart.
@@ -842,13 +842,13 @@ Timeout: 60 sec"""
         for k in list(aria2_options.keys())[start : 10 + start]:
             buttons.data_button(k, f"botset ariavar {k}")
         if state == "view":
-            buttons.data_button("Edit", "botset edit aria")
+            buttons.data_button("✏️", "botset edit aria")
         else:
-            buttons.data_button("View", "botset view aria")
+            buttons.data_button("👁️", "botset view aria")
         buttons.data_button("Add Option", "botset ariavar newkey")
         buttons.data_button("Sync Aria2c", "botset syncaria")
-        buttons.data_button("Back", "botset back")
-        buttons.data_button("Close", "botset close")
+        buttons.data_button("🔙", "botset back")
+        buttons.data_button("❌", "botset close")
         for x in range(0, len(aria2_options), 10):
             buttons.data_button(
                 f"{int(x / 10)}",
@@ -860,12 +860,12 @@ Timeout: 60 sec"""
         for k in list(qbit_options.keys())[start : 10 + start]:
             buttons.data_button(k, f"botset qbitvar {k}")
         if state == "view":
-            buttons.data_button("Edit", "botset edit qbit")
+            buttons.data_button("✏️", "botset edit qbit")
         else:
-            buttons.data_button("View", "botset view qbit")
+            buttons.data_button("👁️", "botset view qbit")
         buttons.data_button("Sync Qbittorrent", "botset syncqbit")
-        buttons.data_button("Back", "botset back")
-        buttons.data_button("Close", "botset close")
+        buttons.data_button("🔙", "botset back")
+        buttons.data_button("❌", "botset close")
         for x in range(0, len(qbit_options), 10):
             buttons.data_button(
                 f"{int(x / 10)}",
@@ -877,13 +877,13 @@ Timeout: 60 sec"""
         for k in list(nzb_options.keys())[start : 10 + start]:
             buttons.data_button(k, f"botset nzbvar {k}")
         if state == "view":
-            buttons.data_button("Edit", "botset edit nzb")
+            buttons.data_button("✏️", "botset edit nzb")
         else:
-            buttons.data_button("View", "botset view nzb")
-        buttons.data_button("Servers", "botset nzbserver")
-        buttons.data_button("Sync Sabnzbd", "botset syncnzb")
-        buttons.data_button("Back", "botset back")
-        buttons.data_button("Close", "botset close")
+            buttons.data_button("👁️", "botset view nzb")
+        buttons.data_button("🌐 Servers", "botset nzbserver")
+        buttons.data_button("🔄 Sync Sabnzbd", "botset syncnzb")
+        buttons.data_button("🔙", "botset back")
+        buttons.data_button("❌", "botset close")
         for x in range(0, len(nzb_options), 10):
             buttons.data_button(
                 f"{int(x / 10)}",
@@ -896,9 +896,9 @@ Timeout: 60 sec"""
         if len(Config.USENET_SERVERS) > 0:
             for index, k in enumerate(Config.USENET_SERVERS[start : 10 + start]):
                 buttons.data_button(k["name"], f"botset nzbser{index}")
-        buttons.data_button("Add New", "botset nzbsevar newser")
-        buttons.data_button("Back", "botset nzb")
-        buttons.data_button("Close", "botset close")
+        buttons.data_button("➕ Add New", "botset nzbsevar newser")
+        buttons.data_button("🔙", "botset nzb")
+        buttons.data_button("❌", "botset close")
         if len(Config.USENET_SERVERS) > 10:
             for x in range(0, len(Config.USENET_SERVERS), 10):
                 buttons.data_button(
@@ -914,12 +914,12 @@ Timeout: 60 sec"""
             for k in list(Config.USENET_SERVERS[index].keys())[start : 10 + start]:
                 buttons.data_button(k, f"botset nzbsevar{index} {k}")
             if state == "view":
-                buttons.data_button("Edit", f"botset edit {key}")
+                buttons.data_button("✏️", f"botset edit {key}")
             else:
-                buttons.data_button("View", f"botset view {key}")
-            buttons.data_button("Remove Server", f"botset remser {index}")
-            buttons.data_button("Back", "botset nzbserver")
-            buttons.data_button("Close", "botset close")
+                buttons.data_button("👁️", f"botset view {key}")
+            buttons.data_button("🗑️ Remove Server", f"botset remser {index}")
+            buttons.data_button("🔙", "botset nzbserver")
+            buttons.data_button("❌", "botset close")
             if len(Config.USENET_SERVERS[index].keys()) > 10:
                 for x in range(0, len(Config.USENET_SERVERS[index]), 10):
                     buttons.data_button(
@@ -930,8 +930,8 @@ Timeout: 60 sec"""
             msg = f"Server Keys | Page: {int(start / 10)} | State: {state}"
         else:
             # Handle invalid index
-            buttons.data_button("Back", "botset nzbserver")
-            buttons.data_button("Close", "botset close")
+            buttons.data_button("🔙", "botset nzbserver")
+            buttons.data_button("❌", "botset close")
             msg = "Invalid server index. Please go back and try again."
     elif key == "mediatools":
         # Force refresh Config.MEDIA_TOOLS_ENABLED from database to ensure accurate status
@@ -963,31 +963,31 @@ Timeout: 60 sec"""
 
         # Only show enabled tools
         if is_media_tool_enabled("watermark"):
-            buttons.data_button("Watermark Settings", "botset mediatools_watermark")
+            buttons.data_button("💧 Watermark Settings", "botset mediatools_watermark")
 
         if is_media_tool_enabled("merge"):
-            buttons.data_button("Merge Settings", "botset mediatools_merge")
+            buttons.data_button("🔗 Merge Settings", "botset mediatools_merge")
 
         if is_media_tool_enabled("convert"):
-            buttons.data_button("Convert Settings", "botset mediatools_convert")
+            buttons.data_button("🔄 Convert Settings", "botset mediatools_convert")
 
         if is_media_tool_enabled("compression"):
             buttons.data_button(
-                "Compression Settings", "botset mediatools_compression"
+                "🗜️ Compression Settings", "botset mediatools_compression"
             )
 
         if is_media_tool_enabled("trim"):
-            buttons.data_button("Trim Settings", "botset mediatools_trim")
+            buttons.data_button("✂️ Trim Settings", "botset mediatools_trim")
 
         if is_media_tool_enabled("extract"):
-            buttons.data_button("Extract Settings", "botset mediatools_extract")
+            buttons.data_button("📦 Extract Settings", "botset mediatools_extract")
 
         # Only show metadata settings if metadata tool is enabled
         if is_media_tool_enabled("metadata"):
-            buttons.data_button("Metadata Settings", "botset mediatools_metadata")
+            buttons.data_button("📝 Metadata Settings", "botset mediatools_metadata")
 
-        buttons.data_button("Back", "botset back", "footer")
-        buttons.data_button("Close", "botset close", "footer")
+        buttons.data_button("🔙", "botset back", "footer")
+        buttons.data_button("❌", "botset close", "footer")
         msg = "<b>Media Tools Settings</b>\n\nConfigure global settings for media tools."
     elif key == "ai":
         # Add buttons for each AI setting
@@ -1008,13 +1008,13 @@ Timeout: 60 sec"""
             buttons.data_button(display_name, f"botset editvar {setting}")
 
         if state == "view":
-            buttons.data_button("Edit", "botset edit ai")
+            buttons.data_button("✏️", "botset edit ai")
         else:
-            buttons.data_button("View", "botset view ai")
+            buttons.data_button("👁️", "botset view ai")
 
-        buttons.data_button("Default", "botset default_ai")
-        buttons.data_button("Back", "botset back", "footer")
-        buttons.data_button("Close", "botset close", "footer")
+        buttons.data_button("🔄", "botset default_ai")
+        buttons.data_button("🔙", "botset back", "footer")
+        buttons.data_button("❌", "botset close", "footer")
 
         # Get current AI settings
         default_ai = Config.DEFAULT_AI_PROVIDER.capitalize()
@@ -1027,28 +1027,25 @@ Timeout: 60 sec"""
         gemini_api_key = "✅ Set" if Config.GEMINI_API_KEY else "❌ Not Set"
         gemini_api_url = Config.GEMINI_API_URL or "Not Set"
 
-        msg = f"""<b>AI Settings</b> | State: {state}
+        msg = f"""<blockquote><b>AI Settings</b> | State: {state}</blockquote>
 
-<b>Default AI Provider:</b> <code>{default_ai}</code>
+<blockquote><b>Default AI Provider:</b> <code>{default_ai}</code></blockquote>
 
-<b>Mistral AI:</b>
+<blockquote><b>Mistral AI:</b>
 • <b>API Key:</b> {mistral_api_key}
-• <b>API URL:</b> <code>{mistral_api_url}</code>
-
-<b>DeepSeek AI:</b>
+• <b>API URL:</b> <code>{mistral_api_url}</code></blockquote>
+<blockquote><b>DeepSeek AI:</b>
 • <b>API Key:</b> {deepseek_api_key}
-• <b>API URL:</b> <code>{deepseek_api_url}</code>
-
-<b>ChatGPT:</b>
+• <b>API URL:</b> <code>{deepseek_api_url}</code></blockquote>
+<blockquote><b>ChatGPT:</b>
 • <b>API Key:</b> {chatgpt_api_key}
-• <b>API URL:</b> <code>{chatgpt_api_url}</code>
-
-<b>Gemini AI:</b>
+• <b>API URL:</b> <code>{chatgpt_api_url}</code></blockquote>
+<blockquote><b>Gemini AI:</b>
 • <b>API Key:</b> {gemini_api_key}
-• <b>API URL:</b> <code>{gemini_api_url}</code>
+• <b>API URL:</b> <code>{gemini_api_url}</code></blockquote>
 
-<i>Note: For each AI provider, configure either API Key or API URL. If both are set, API Key will be used first with fallback to API URL.</i>
-<i>Users can override these settings in their user settings.</i>
+<blockquote><i>Note: For each AI provider, configure either API Key or API URL. If both are set, API Key will be used first with fallback to API URL.</i>
+<i>Users can override these settings in their user settings.</i></blockquote>
 <i>Use /ask command to chat with the default AI provider.</i>"""
 
     elif key == "taskmonitor":
@@ -1075,13 +1072,13 @@ Timeout: 60 sec"""
             buttons.data_button(display_name, f"botset editvar {setting}")
 
         if state == "view":
-            buttons.data_button("Edit", "botset edit taskmonitor")
+            buttons.data_button("✏️", "botset edit taskmonitor")
         else:
-            buttons.data_button("View", "botset view taskmonitor")
+            buttons.data_button("👁️", "botset view taskmonitor")
 
-        buttons.data_button("Default", "botset default_taskmonitor")
-        buttons.data_button("Back", "botset back", "footer")
-        buttons.data_button("Close", "botset close", "footer")
+        buttons.data_button("🔄", "botset default_taskmonitor")
+        buttons.data_button("🔙", "botset back", "footer")
+        buttons.data_button("❌", "botset close", "footer")
 
         # Get current task monitoring settings
         monitor_enabled = (
@@ -1103,7 +1100,7 @@ Timeout: 60 sec"""
 
         msg = f"""<b>Task Monitoring Settings</b> | State: {state}
 
-<b>Status:</b> {monitor_enabled}
+<blockquote><b>Status:</b> {monitor_enabled}
 <b>Check Interval:</b> {monitor_interval}
 <b>Consecutive Checks:</b> {monitor_checks}
 <b>Speed Threshold:</b> {monitor_speed}
@@ -1114,7 +1111,7 @@ Timeout: 60 sec"""
 <b>CPU High Threshold:</b> {monitor_cpu_high}
 <b>CPU Low Threshold:</b> {monitor_cpu_low}
 <b>Memory High Threshold:</b> {monitor_memory_high}
-<b>Memory Low Threshold:</b> {monitor_memory_low}
+<b>Memory Low Threshold:</b> {monitor_memory_low}</blockquote>
 
 Configure task monitoring settings to automatically manage downloads based on performance metrics."""
     elif key == "mediatools_watermark":
@@ -1216,14 +1213,14 @@ Configure task monitoring settings to automatically manage downloads based on pe
             buttons.data_button(display_name, f"botset editvar {setting}")
 
         if state == "view":
-            buttons.data_button("Edit", "botset edit mediatools_watermark")
+            buttons.data_button("✏️", "botset edit mediatools_watermark")
         else:
-            buttons.data_button("View", "botset view mediatools_watermark")
+            buttons.data_button("👁️", "botset view mediatools_watermark")
 
-        buttons.data_button("Default", "botset default_watermark")
+        buttons.data_button("🔄", "botset default_watermark")
 
-        buttons.data_button("Back", "botset mediatools", "footer")
-        buttons.data_button("Close", "botset close", "footer")
+        buttons.data_button("🔙", "botset mediatools", "footer")
+        buttons.data_button("❌", "botset close", "footer")
 
         # Get current visual watermark settings
         watermark_enabled = (
@@ -1269,7 +1266,7 @@ Configure task monitoring settings to automatically manage downloads based on pe
 
         msg = f"""<b>Watermark Settings</b> | State: {state}
 
-<b>Visual Watermark Settings:</b>
+<blockquote><b>Visual Watermark Settings:</b>
 <b>Status:</b> {watermark_enabled}
 <b>Text:</b> <code>{watermark_text}</code>
 <b>Position:</b> <code>{watermark_position}</code>
@@ -1281,17 +1278,17 @@ Configure task monitoring settings to automatically manage downloads based on pe
 <b>Thread Number:</b> <code>{watermark_thread_number}</code>
 <b>Fast Mode:</b> {watermark_fast_mode}
 <b>Maintain Quality:</b> {watermark_maintain_quality}
-<b>Opacity:</b> <code>{watermark_opacity}</code>
+<b>Opacity:</b> <code>{watermark_opacity}</code></blockquote>
 
-<b>Audio Watermark Settings:</b>
+<blockquote><b>Audio Watermark Settings:</b>
 <b>Status:</b> {audio_watermark_enabled}
 <b>Text:</b> <code>{audio_watermark_text}</code>
-<b>Volume:</b> <code>{audio_watermark_volume}</code>
+<b>Volume:</b> <code>{audio_watermark_volume}</code></blockquote>
 
-<b>Subtitle Watermark Settings:</b>
+<blockquote><b>Subtitle Watermark Settings:</b>
 <b>Status:</b> {subtitle_watermark_enabled}
 <b>Text:</b> <code>{subtitle_watermark_text}</code>
-<b>Style:</b> <code>{subtitle_watermark_style}</code>
+<b>Style:</b> <code>{subtitle_watermark_style}</code></blockquote>
 
 Configure global watermark settings that will be used when user settings are not available."""
 
@@ -1417,16 +1414,16 @@ Configure global watermark settings that will be used when user settings are not
         # Add action buttons in a separate row
         # Add Edit/View button
         if state == "view":
-            buttons.data_button("Edit", "botset edit mediatools_merge", "footer")
+            buttons.data_button("✏️", "botset edit mediatools_merge", "footer")
         else:
-            buttons.data_button("View", "botset view mediatools_merge", "footer")
+            buttons.data_button("👁️", "botset view mediatools_merge", "footer")
 
         # Add Default button
-        buttons.data_button("Default", "botset default_merge", "footer")
+        buttons.data_button("🔄", "botset default_merge", "footer")
 
         # Add navigation buttons
-        buttons.data_button("Back", "botset mediatools", "footer")
-        buttons.data_button("Close", "botset close", "footer")
+        buttons.data_button("🔙", "botset mediatools", "footer")
+        buttons.data_button("❌", "botset close", "footer")
 
         # Add pagination buttons in a separate row below action buttons
         if total_pages > 1:
@@ -1506,7 +1503,7 @@ Configure global watermark settings that will be used when user settings are not
 
         msg = f"""<b>Merge Settings</b> | State: {state}
 
-<b>Status:</b> {merge_enabled}
+<blockquote><b>Status:</b> {merge_enabled}
 <b>Concat Demuxer:</b> {concat_demuxer}
 <b>Filter Complex:</b> {filter_complex}
 <b>Video Format:</b> <code>{video_format}</code>
@@ -1514,10 +1511,10 @@ Configure global watermark settings that will be used when user settings are not
 <b>Priority:</b> <code>{merge_priority}</code>
 <b>Threading:</b> {merge_threading}
 <b>Thread Number:</b> <code>{merge_thread_number}</code>
-<b>Remove Original:</b> {merge_remove_original}
+<b>Remove Original:</b> {merge_remove_original}</blockquote>
 
-Configure global merge settings that will be used when user settings are not available.
-Current page shows: {category_text} settings."""
+<blockquote>Configure global merge settings that will be used when user settings are not available.
+Current page shows: {category_text} settings.</blockquote>"""
 
         # Add page info to message
         if total_pages > 1:
@@ -1666,14 +1663,14 @@ Current page shows: {category_text} settings."""
             buttons.data_button(display_name, f"botset editvar {setting}")
 
         if state == "view":
-            buttons.data_button("Edit", "botset edit mediatools_extract")
+            buttons.data_button("✏️", "botset edit mediatools_extract")
         else:
-            buttons.data_button("View", "botset view mediatools_extract")
+            buttons.data_button("👁️", "botset view mediatools_extract")
 
-        buttons.data_button("Default", "botset default_extract")
+        buttons.data_button("🔄", "botset default_extract")
 
-        buttons.data_button("Back", "botset mediatools", "footer")
-        buttons.data_button("Close", "botset close", "footer")
+        buttons.data_button("🔙", "botset mediatools", "footer")
+        buttons.data_button("❌", "botset close", "footer")
 
         # Get current extract settings
         extract_enabled = "✅ Enabled" if Config.EXTRACT_ENABLED else "❌ Disabled"
@@ -1734,12 +1731,11 @@ Current page shows: {category_text} settings."""
 
         msg = f"""<b>Extract Settings</b> | State: {state}
 
-<b>General Settings:</b>
+<blockquote><b>General Settings:</b>
 • <b>Status:</b> {extract_enabled}
 • <b>Priority:</b> <code>{extract_priority}</code>
-• <b>Delete Original:</b> {extract_delete_original}
-
-<b>Video Extract Settings:</b>
+• <b>Delete Original:</b> {extract_delete_original}</blockquote>
+<blockquote><b>Video Extract Settings:</b>
 • <b>Status:</b> {video_enabled}
 • <b>Codec:</b> <code>{video_codec}</code>
 • <b>Format:</b> <code>{video_format}</code>
@@ -1748,9 +1744,8 @@ Current page shows: {category_text} settings."""
 • <b>Preset:</b> <code>{video_preset}</code>
 • <b>Bitrate:</b> <code>{video_bitrate}</code>
 • <b>Resolution:</b> <code>{video_resolution}</code>
-• <b>FPS:</b> <code>{video_fps}</code>
-
-<b>Audio Extract Settings:</b>
+• <b>FPS:</b> <code>{video_fps}</code></blockquote>
+<blockquote><b>Audio Extract Settings:</b>
 • <b>Status:</b> {audio_enabled}
 • <b>Codec:</b> <code>{audio_codec}</code>
 • <b>Format:</b> <code>{audio_format}</code>
@@ -1758,9 +1753,8 @@ Current page shows: {category_text} settings."""
 • <b>Bitrate:</b> <code>{audio_bitrate}</code>
 • <b>Channels:</b> <code>{audio_channels}</code>
 • <b>Sampling:</b> <code>{audio_sampling}</code>
-• <b>Volume:</b> <code>{audio_volume}</code>
-
-<b>Subtitle Extract Settings:</b>
+• <b>Volume:</b> <code>{audio_volume}</code></blockquote>
+<blockquote><b>Subtitle Extract Settings:</b>
 • <b>Status:</b> {subtitle_enabled}
 • <b>Codec:</b> <code>{subtitle_codec}</code>
 • <b>Format:</b> <code>{subtitle_format}</code>
@@ -1768,25 +1762,22 @@ Current page shows: {category_text} settings."""
 • <b>Language:</b> <code>{subtitle_language}</code>
 • <b>Encoding:</b> <code>{subtitle_encoding}</code>
 • <b>Font:</b> <code>{subtitle_font}</code>
-• <b>Font Size:</b> <code>{subtitle_font_size}</code>
-
-<b>Attachment Extract Settings:</b>
+• <b>Font Size:</b> <code>{subtitle_font_size}</code></blockquote>
+<blockquote><b>Attachment Extract Settings:</b>
 • <b>Status:</b> {attachment_enabled}
 • <b>Format:</b> <code>{attachment_format}</code>
 • <b>Index:</b> <code>{attachment_index}</code>
-• <b>Filter:</b> <code>{attachment_filter}</code>
-
-<b>Quality Settings:</b>
-• <b>Maintain Quality:</b> {maintain_quality}
-
-<b>Usage:</b>
+• <b>Filter:</b> <code>{attachment_filter}</code></blockquote>
+<blockquote><b>Quality Settings:</b>
+• <b>Maintain Quality:</b> {maintain_quality}</blockquote>
+<blockquote><b>Usage:</b>
 • Main Extract toggle must be enabled
 • Media type specific toggles must be enabled for respective extractions
 • Use <code>-extract</code> to enable extraction
 • Use <code>-extract-video</code>, <code>-extract-audio</code>, etc. for specific track types
 • Use <code>-extract-video-index 0</code> to extract specific track by index
 • Add <code>-del</code> to delete original files after extraction
-• Settings with value 'None' will not be used in command generation
+• Settings with value 'None' will not be used in command generation</blockquote>
 
 Configure global extract settings that will be used when user settings are not available."""
 
@@ -1932,14 +1923,14 @@ Configure global extract settings that will be used when user settings are not a
             buttons.data_button(display_name, f"botset editvar {setting}")
 
         if state == "view":
-            buttons.data_button("Edit", "botset edit mediatools_trim")
+            buttons.data_button("✏️", "botset edit mediatools_trim")
         else:
-            buttons.data_button("View", "botset view mediatools_trim")
+            buttons.data_button("👁️", "botset view mediatools_trim")
 
-        buttons.data_button("Default", "botset default_trim")
+        buttons.data_button("🔄", "botset default_trim")
 
-        buttons.data_button("Back", "botset mediatools", "footer")
-        buttons.data_button("Close", "botset close", "footer")
+        buttons.data_button("🔙", "botset mediatools", "footer")
+        buttons.data_button("❌", "botset close", "footer")
 
         # Get current trim settings
         trim_enabled = "✅ Enabled" if Config.TRIM_ENABLED else "❌ Disabled"
@@ -1986,50 +1977,43 @@ Configure global extract settings that will be used when user settings are not a
 
         msg = f"""<b>Trim Settings</b> | State: {state}
 
-<b>General Settings:</b>
+<blockquote><b>General Settings:</b>
 • <b>Status:</b> {trim_enabled}
 • <b>Priority:</b> <code>{trim_priority}</code>
 • <b>Start Time:</b> <code>{trim_start_time}</code>
-• <b>End Time:</b> <code>{trim_end_time}</code>
-
-<b>Video Trim Settings:</b>
+• <b>End Time:</b> <code>{trim_end_time}</code></blockquote>
+<blockquote><b>Video Trim Settings:</b>
 • <b>Status:</b> {video_enabled}
 • <b>Codec:</b> <code>{video_codec}</code>
 • <b>Preset:</b> <code>{video_preset}</code>
-• <b>Format:</b> <code>{video_format}</code>
-
-<b>Audio Trim Settings:</b>
+• <b>Format:</b> <code>{video_format}</code></blockquote>
+<blockquote><b>Audio Trim Settings:</b>
 • <b>Status:</b> {audio_enabled}
 • <b>Codec:</b> <code>{audio_codec}</code>
 • <b>Preset:</b> <code>{audio_preset}</code>
-• <b>Format:</b> <code>{audio_format}</code>
-
-<b>Image Trim Settings:</b>
+• <b>Format:</b> <code>{audio_format}</code></blockquote>
+<blockquote><b>Image Trim Settings:</b>
 • <b>Status:</b> {image_enabled}
 • <b>Quality:</b> <code>{image_quality}</code>
-• <b>Format:</b> <code>{image_format}</code>
-
-<b>Document Trim Settings:</b>
+• <b>Format:</b> <code>{image_format}</code></blockquote>
+<blockquote><b>Document Trim Settings:</b>
 • <b>Status:</b> {document_enabled}
 • <b>Quality:</b> <code>{document_quality}</code>
-• <b>Format:</b> <code>{document_format}</code>
-
-<b>Subtitle Trim Settings:</b>
+• <b>Format:</b> <code>{document_format}</code></blockquote>
+<blockquote><b>Subtitle Trim Settings:</b>
 • <b>Status:</b> {subtitle_enabled}
 • <b>Encoding:</b> <code>{subtitle_encoding}</code>
-• <b>Format:</b> <code>{subtitle_format}</code>
-
-<b>Archive Trim Settings:</b>
+• <b>Format:</b> <code>{subtitle_format}</code></blockquote>
+<blockquote><b>Archive Trim Settings:</b>
 • <b>Status:</b> {archive_enabled}
-• <b>Format:</b> <code>{archive_format}</code>
-
-<b>Usage:</b>
+• <b>Format:</b> <code>{archive_format}</code></blockquote>
+<blockquote><b>Usage:</b>
 • Main Trim toggle must be enabled
 • Media type specific toggles must be enabled for respective trims
 • Use <code>-trim</code> to enable trimming
 • Use <code>-trim-start HH:MM:SS</code> to set start time
 • Use <code>-trim-end HH:MM:SS</code> to set end time
-• Add <code>-del</code> to delete original files after trimming
+• Add <code>-del</code> to delete original files after trimming</blockquote>
 
 Configure global trim settings that will be used when user settings are not available."""
 
@@ -2175,14 +2159,14 @@ Configure global trim settings that will be used when user settings are not avai
             buttons.data_button(display_name, f"botset editvar {setting}")
 
         if state == "view":
-            buttons.data_button("Edit", "botset edit mediatools_extract")
+            buttons.data_button("✏️", "botset edit mediatools_extract")
         else:
-            buttons.data_button("View", "botset view mediatools_extract")
+            buttons.data_button("👁️", "botset view mediatools_extract")
 
-        buttons.data_button("Default", "botset default_extract")
+        buttons.data_button("🔄", "botset default_extract")
 
-        buttons.data_button("Back", "botset mediatools", "footer")
-        buttons.data_button("Close", "botset close", "footer")
+        buttons.data_button("🔙", "botset mediatools", "footer")
+        buttons.data_button("❌", "botset close", "footer")
 
         # Get current extract settings
         extract_enabled = "✅ Enabled" if Config.EXTRACT_ENABLED else "❌ Disabled"
@@ -2243,12 +2227,11 @@ Configure global trim settings that will be used when user settings are not avai
 
         msg = f"""<b>Extract Settings</b> | State: {state}
 
-<b>General Settings:</b>
+<blockquote><b>General Settings:</b>
 • <b>Status:</b> {extract_enabled}
 • <b>Priority:</b> <code>{extract_priority}</code>
-• <b>Delete Original:</b> {delete_original}
-
-<b>Video Extract Settings:</b>
+• <b>Delete Original:</b> {delete_original}</blockquote>
+<blockquote><b>Video Extract Settings:</b>
 • <b>Status:</b> {video_enabled}
 • <b>Codec:</b> <code>{video_codec}</code>
 • <b>Format:</b> <code>{video_format}</code>
@@ -2257,9 +2240,8 @@ Configure global trim settings that will be used when user settings are not avai
 • <b>Preset:</b> <code>{video_preset}</code>
 • <b>Bitrate:</b> <code>{video_bitrate}</code>
 • <b>Resolution:</b> <code>{video_resolution}</code>
-• <b>FPS:</b> <code>{video_fps}</code>
-
-<b>Audio Extract Settings:</b>
+• <b>FPS:</b> <code>{video_fps}</code></blockquote>
+<blockquote><b>Audio Extract Settings:</b>
 • <b>Status:</b> {audio_enabled}
 • <b>Codec:</b> <code>{audio_codec}</code>
 • <b>Format:</b> <code>{audio_format}</code>
@@ -2267,9 +2249,8 @@ Configure global trim settings that will be used when user settings are not avai
 • <b>Bitrate:</b> <code>{audio_bitrate}</code>
 • <b>Channels:</b> <code>{audio_channels}</code>
 • <b>Sampling:</b> <code>{audio_sampling}</code>
-• <b>Volume:</b> <code>{audio_volume}</code>
-
-<b>Subtitle Extract Settings:</b>
+• <b>Volume:</b> <code>{audio_volume}</code></blockquote>
+<blockquote><b>Subtitle Extract Settings:</b>
 • <b>Status:</b> {subtitle_enabled}
 • <b>Codec:</b> <code>{subtitle_codec}</code>
 • <b>Format:</b> <code>{subtitle_format}</code>
@@ -2277,24 +2258,21 @@ Configure global trim settings that will be used when user settings are not avai
 • <b>Language:</b> <code>{subtitle_language}</code>
 • <b>Encoding:</b> <code>{subtitle_encoding}</code>
 • <b>Font:</b> <code>{subtitle_font}</code>
-• <b>Font Size:</b> <code>{subtitle_font_size}</code>
-
-<b>Attachment Extract Settings:</b>
+• <b>Font Size:</b> <code>{subtitle_font_size}</code></blockquote>
+<blockquote><b>Attachment Extract Settings:</b>
 • <b>Status:</b> {attachment_enabled}
 • <b>Format:</b> <code>{attachment_format}</code>
 • <b>Index:</b> <code>{attachment_index}</code>
-• <b>Filter:</b> <code>{attachment_filter}</code>
-
-<b>Quality Settings:</b>
-• <b>Maintain Quality:</b> {maintain_quality}
-
-<b>Usage:</b>
+• <b>Filter:</b> <code>{attachment_filter}</code></blockquote>
+<blockquote><b>Quality Settings:</b>
+• <b>Maintain Quality:</b> {maintain_quality}</blockquote>
+<blockquote><b>Usage:</b>
 • Main Extract toggle must be enabled
 • Media type specific toggles must be enabled for respective extractions
 • Use <code>-extract</code> to enable extraction
 • Use <code>-extract-video</code>, <code>-extract-audio</code>, etc. for specific track types
 • Use <code>-extract-video-index 0</code> to extract specific track by index
-• Add <code>-del</code> to delete original files after extraction
+• Add <code>-del</code> to delete original files after extraction</blockquote>
 
 Configure global extract settings that will be used when user settings are not available."""
 
@@ -2467,14 +2445,14 @@ Configure global extract settings that will be used when user settings are not a
             buttons.data_button(display_name, f"botset editvar {setting}")
 
         if state == "view":
-            buttons.data_button("Edit", "botset edit mediatools_compression")
+            buttons.data_button("✏️", "botset edit mediatools_compression")
         else:
-            buttons.data_button("View", "botset view mediatools_compression")
+            buttons.data_button("👁️", "botset view mediatools_compression")
 
-        buttons.data_button("Default", "botset default_compression")
+        buttons.data_button("🔄", "botset default_compression")
 
-        buttons.data_button("Back", "botset mediatools", "footer")
-        buttons.data_button("Close", "botset close", "footer")
+        buttons.data_button("🔙", "botset mediatools", "footer")
+        buttons.data_button("❌", "botset close", "footer")
 
         # Get current compression settings
         compression_enabled = (
@@ -2542,59 +2520,52 @@ Configure global extract settings that will be used when user settings are not a
 
         msg = f"""<b>Compression Settings</b> | State: {state}
 
-<b>General Settings:</b>
+<blockquote><b>General Settings:</b>
 • <b>Status:</b> {compression_enabled}
 • <b>Priority:</b> <code>{compression_priority}</code>
-• <b>Delete Original:</b> {compression_delete_original}
-
-<b>Video Compression Settings:</b>
+• <b>Delete Original:</b> {compression_delete_original}</blockquote>
+<blockquote><b>Video Compression Settings:</b>
 • <b>Status:</b> {video_enabled}
 • <b>Preset:</b> <code>{video_preset}</code>
 • <b>CRF:</b> <code>{video_crf}</code>
 • <b>Codec:</b> <code>{video_codec}</code>
 • <b>Tune:</b> <code>{video_tune}</code>
 • <b>Pixel Format:</b> <code>{video_pixel_format}</code>
-• <b>Format:</b> <code>{video_format}</code>
-
-<b>Audio Compression Settings:</b>
+• <b>Format:</b> <code>{video_format}</code></blockquote>
+<blockquote><b>Audio Compression Settings:</b>
 • <b>Status:</b> {audio_enabled}
 • <b>Preset:</b> <code>{audio_preset}</code>
 • <b>Codec:</b> <code>{audio_codec}</code>
 • <b>Bitrate:</b> <code>{audio_bitrate}</code>
 • <b>Channels:</b> <code>{audio_channels}</code>
-• <b>Format:</b> <code>{audio_format}</code>
-
-<b>Image Compression Settings:</b>
+• <b>Format:</b> <code>{audio_format}</code></blockquote>
+<blockquote><b>Image Compression Settings:</b>
 • <b>Status:</b> {image_enabled}
 • <b>Preset:</b> <code>{image_preset}</code>
 • <b>Quality:</b> <code>{image_quality}</code>
 • <b>Resize:</b> <code>{image_resize}</code>
-• <b>Format:</b> <code>{image_format}</code>
-
-<b>Document Compression Settings:</b>
+• <b>Format:</b> <code>{image_format}</code></blockquote>
+<blockquote><b>Document Compression Settings:</b>
 • <b>Status:</b> {document_enabled}
 • <b>Preset:</b> <code>{document_preset}</code>
 • <b>DPI:</b> <code>{document_dpi}</code>
-• <b>Format:</b> <code>{document_format}</code>
-
-<b>Subtitle Compression Settings:</b>
+• <b>Format:</b> <code>{document_format}</code></blockquote>
+<blockquote><b>Subtitle Compression Settings:</b>
 • <b>Status:</b> {subtitle_enabled}
 • <b>Preset:</b> <code>{subtitle_preset}</code>
 • <b>Encoding:</b> <code>{subtitle_encoding}</code>
-• <b>Format:</b> <code>{subtitle_format}</code>
-
-<b>Archive Compression Settings:</b>
+• <b>Format:</b> <code>{subtitle_format}</code></blockquote>
+<blockquote><b>Archive Compression Settings:</b>
 • <b>Status:</b> {archive_enabled}
 • <b>Preset:</b> <code>{archive_preset}</code>
 • <b>Level:</b> <code>{archive_level}</code>
 • <b>Method:</b> <code>{archive_method}</code>
-• <b>Format:</b> <code>{archive_format}</code>
-
-<b>Usage:</b>
+• <b>Format:</b> <code>{archive_format}</code></blockquote>
+<blockquote><b>Usage:</b>
 • Main Compression toggle must be enabled
 • Media type specific toggles must be enabled for respective compressions
 • Use <code>-video-fast</code>, <code>-audio-medium</code>, etc. for preset flags
-• Add <code>-del</code> to delete original files after compression
+• Add <code>-del</code> to delete original files after compression</blockquote>
 
 Configure global compression settings that will be used when user settings are not available."""
 
@@ -2746,14 +2717,14 @@ Configure global compression settings that will be used when user settings are n
             buttons.data_button(display_name, f"botset editvar {setting}")
 
         if state == "view":
-            buttons.data_button("Edit", "botset edit mediatools_convert")
+            buttons.data_button("✏️", "botset edit mediatools_convert")
         else:
-            buttons.data_button("View", "botset view mediatools_convert")
+            buttons.data_button("👁️", "botset view mediatools_convert")
 
-        buttons.data_button("Default", "botset default_convert")
+        buttons.data_button("🔄", "botset default_convert")
 
-        buttons.data_button("Back", "botset mediatools", "footer")
-        buttons.data_button("Close", "botset close", "footer")
+        buttons.data_button("🔙", "botset mediatools", "footer")
+        buttons.data_button("❌", "botset close", "footer")
 
         # Get current convert settings
         convert_enabled = "✅ Enabled" if Config.CONVERT_ENABLED else "❌ Disabled"
@@ -2814,12 +2785,11 @@ Configure global compression settings that will be used when user settings are n
 
         msg = f"""<b>Convert Settings</b> | State: {state}
 
-<b>General Settings:</b>
+<blockquote><b>General Settings:</b>
 • <b>Status:</b> {convert_enabled}
 • <b>Priority:</b> <code>{convert_priority}</code>
-• <b>Delete Original:</b> {convert_delete_original}
-
-<b>Video Convert Settings:</b>
+• <b>Delete Original:</b> {convert_delete_original}</blockquote>
+<blockquote><b>Video Convert Settings:</b>
 • <b>Status:</b> {video_enabled}
 • <b>Format:</b> <code>{video_format}</code>
 • <b>Codec:</b> <code>{video_codec}</code>
@@ -2828,36 +2798,31 @@ Configure global compression settings that will be used when user settings are n
 • <b>Preset:</b> <code>{video_preset}</code>
 • <b>Maintain Quality:</b> {video_maintain_quality}
 • <b>Resolution:</b> <code>{video_resolution}</code>
-• <b>FPS:</b> <code>{video_fps}</code>
-
-<b>Audio Convert Settings:</b>
+• <b>FPS:</b> <code>{video_fps}</code></blockquote>
+<blockquote><b>Audio Convert Settings:</b>
 • <b>Status:</b> {audio_enabled}
 • <b>Format:</b> <code>{audio_format}</code>
 • <b>Codec:</b> <code>{audio_codec}</code>
 • <b>Bitrate:</b> <code>{audio_bitrate}</code>
 • <b>Channels:</b> <code>{audio_channels}</code>
 • <b>Sampling:</b> <code>{audio_sampling}</code>
-• <b>Volume:</b> <code>{audio_volume}</code>
-
-<b>Subtitle Convert Settings:</b>
+• <b>Volume:</b> <code>{audio_volume}</code></blockquote>
+<blockquote><b>Subtitle Convert Settings:</b>
 • <b>Status:</b> {subtitle_enabled}
 • <b>Format:</b> <code>{subtitle_format}</code>
 • <b>Encoding:</b> <code>{subtitle_encoding}</code>
-• <b>Language:</b> <code>{subtitle_language}</code>
-
-<b>Document Convert Settings:</b>
+• <b>Language:</b> <code>{subtitle_language}</code></blockquote>
+<blockquote><b>Document Convert Settings:</b>
 • <b>Status:</b> {document_enabled}
 • <b>Format:</b> <code>{document_format}</code>
 • <b>Quality:</b> <code>{document_quality}</code>
-• <b>DPI:</b> <code>{document_dpi}</code>
-
-<b>Archive Convert Settings:</b>
+• <b>DPI:</b> <code>{document_dpi}</code></blockquote>
+<blockquote><b>Archive Convert Settings:</b>
 • <b>Status:</b> {archive_enabled}
 • <b>Format:</b> <code>{archive_format}</code>
 • <b>Level:</b> <code>{archive_level}</code>
-• <b>Method:</b> <code>{archive_method}</code>
-
-<b>Usage:</b>
+• <b>Method:</b> <code>{archive_method}</code></blockquote>
+<blockquote><b>Usage:</b>
 • Main Convert toggle must be enabled
 • Media type specific toggles must be enabled for respective conversions
 • Use <code>-cv format</code> for video conversion (e.g., <code>-cv mp4</code>)
@@ -2865,7 +2830,7 @@ Configure global compression settings that will be used when user settings are n
 • Use <code>-cs format</code> for subtitle conversion (e.g., <code>-cs srt</code>)
 • Use <code>-cd format</code> for document conversion (e.g., <code>-cd pdf</code>)
 • Use <code>-cr format</code> for archive conversion (e.g., <code>-cr zip</code>)
-• Add <code>-del</code> to delete original files after conversion
+• Add <code>-del</code> to delete original files after conversion</blockquote>
 
 Configure global convert settings that will be used when user settings are not available."""
 
@@ -2933,14 +2898,14 @@ Configure global convert settings that will be used when user settings are not a
             buttons.data_button(display_name, callback_data)
 
         if state == "view":
-            buttons.data_button("Edit", "botset edit mediatools_metadata")
+            buttons.data_button("✏️", "botset edit mediatools_metadata")
         else:
-            buttons.data_button("View", "botset view mediatools_metadata")
+            buttons.data_button("👁️", "botset view mediatools_metadata")
 
-        buttons.data_button("Default", "botset default_metadata")
+        buttons.data_button("🔄", "botset default_metadata")
 
-        buttons.data_button("Back", "botset mediatools", "footer")
-        buttons.data_button("Close", "botset close", "footer")
+        buttons.data_button("🔙", "botset mediatools", "footer")
+        buttons.data_button("❌", "botset close", "footer")
 
         # Get current global metadata settings
         metadata_all = Config.METADATA_ALL or "None"
@@ -2965,29 +2930,25 @@ Configure global convert settings that will be used when user settings are not a
 
         msg = f"""<b>Metadata Settings</b> | State: {state}
 
-<b>Global Settings:</b>
+<blockquote><b>Global Settings:</b>
 <b>All Fields:</b> <code>{metadata_all}</code>
 <b>Global Title:</b> <code>{metadata_title}</code>
 <b>Global Author:</b> <code>{metadata_author}</code>
-<b>Global Comment:</b> <code>{metadata_comment}</code>
-
-<b>Video Track Settings:</b>
+<b>Global Comment:</b> <code>{metadata_comment}</code></blockquote>
+<blockquote><b>Video Track Settings:</b>
 <b>Video Title:</b> <code>{metadata_video_title}</code>
 <b>Video Author:</b> <code>{metadata_video_author}</code>
-<b>Video Comment:</b> <code>{metadata_video_comment}</code>
-
-<b>Audio Track Settings:</b>
+<b>Video Comment:</b> <code>{metadata_video_comment}</code></blockquote>
+<blockquote><b>Audio Track Settings:</b>
 <b>Audio Title:</b> <code>{metadata_audio_title}</code>
 <b>Audio Author:</b> <code>{metadata_audio_author}</code>
-<b>Audio Comment:</b> <code>{metadata_audio_comment}</code>
-
-<b>Subtitle Track Settings:</b>
+<b>Audio Comment:</b> <code>{metadata_audio_comment}</code></blockquote>
+<blockquote><b>Subtitle Track Settings:</b>
 <b>Subtitle Title:</b> <code>{metadata_subtitle_title}</code>
 <b>Subtitle Author:</b> <code>{metadata_subtitle_author}</code>
-<b>Subtitle Comment:</b> <code>{metadata_subtitle_comment}</code>
+<b>Subtitle Comment:</b> <code>{metadata_subtitle_comment}</code></blockquote>
 
 <b>Note:</b> 'All Fields' takes priority over all other settings when set.
-
 Configure global metadata settings that will be used when user settings are not available."""
 
     elif key == "mediatools_merge_config":
@@ -3093,11 +3054,11 @@ Configure global metadata settings that will be used when user settings are not 
             )
 
         # Add Default button
-        buttons.data_button("Default", "botset default_merge_config", "footer")
+        buttons.data_button("🔄", "botset default_merge_config", "footer")
 
         # Add navigation buttons
-        buttons.data_button("Back", "botset mediatools_merge", "footer")
-        buttons.data_button("Close", "botset close", "footer")
+        buttons.data_button("🔙", "botset mediatools_merge", "footer")
+        buttons.data_button("❌", "botset close", "footer")
 
         # Add pagination buttons in a separate row below action buttons
         if total_pages > 1:
@@ -3164,53 +3125,47 @@ Configure global metadata settings that will be used when user settings are not 
 
         msg = f"""<b>Merge Configuration</b> | State: {state}
 
-<b>Output Formats:</b>
+<blockquote><b>Output Formats:</b>
 • <b>Video:</b> <code>{video_format}</code>
 • <b>Audio:</b> <code>{audio_format}</code>
 • <b>Image:</b> <code>{image_format}</code>
 • <b>Document:</b> <code>{document_format}</code>
-• <b>Subtitle:</b> <code>{subtitle_format}</code>
-
-<b>Video Settings:</b>
+• <b>Subtitle:</b> <code>{subtitle_format}</code></blockquote>
+<blockquote><b>Video Settings:</b>
 • <b>Codec:</b> <code>{video_codec}</code>
 • <b>Quality:</b> <code>{video_quality}</code>
 • <b>Preset:</b> <code>{video_preset}</code>
 • <b>CRF:</b> <code>{video_crf}</code>
 • <b>Pixel Format:</b> <code>{video_pixel_format}</code>
 • <b>Tune:</b> <code>{video_tune}</code>
-• <b>Faststart:</b> <code>{video_faststart}</code>
-
-<b>Audio Settings:</b>
+• <b>Faststart:</b> <code>{video_faststart}</code></blockquote>
+<blockquote><b>Audio Settings:</b>
 • <b>Codec:</b> <code>{audio_codec}</code>
 • <b>Bitrate:</b> <code>{audio_bitrate}</code>
 • <b>Channels:</b> <code>{audio_channels}</code>
 • <b>Sampling:</b> <code>{audio_sampling}</code>
-• <b>Volume:</b> <code>{audio_volume}</code>
-
-<b>Image Settings:</b>
+• <b>Volume:</b> <code>{audio_volume}</code></blockquote>
+<blockquote><b>Image Settings:</b>
 • <b>Mode:</b> <code>{image_mode}</code>
 • <b>Columns:</b> <code>{image_columns}</code>
 • <b>Quality:</b> <code>{image_quality}</code>
 • <b>DPI:</b> <code>{image_dpi}</code>
 • <b>Resize:</b> <code>{image_resize}</code>
-• <b>Background:</b> <code>{image_background}</code>
-
-<b>Subtitle Settings:</b>
+• <b>Background:</b> <code>{image_background}</code></blockquote>
+<blockquote><b>Subtitle Settings:</b>
 • <b>Encoding:</b> <code>{subtitle_encoding}</code>
 • <b>Font:</b> <code>{subtitle_font}</code>
 • <b>Font Size:</b> <code>{subtitle_font_size}</code>
 • <b>Font Color:</b> <code>{subtitle_font_color}</code>
-• <b>Background:</b> <code>{subtitle_background}</code>
-
-<b>Document Settings:</b>
+• <b>Background:</b> <code>{subtitle_background}</code></blockquote>
+<blockquote><b>Document Settings:</b>
 • <b>Paper Size:</b> <code>{document_paper_size}</code>
 • <b>Orientation:</b> <code>{document_orientation}</code>
-• <b>Margin:</b> <code>{document_margin}</code>
-
-<b>Metadata:</b>
+• <b>Margin:</b> <code>{document_margin}</code></blockquote>
+<blockquote><b>Metadata:</b>
 • <b>Title:</b> <code>{metadata_title}</code>
 • <b>Author:</b> <code>{metadata_author}</code>
-• <b>Comment:</b> <code>{metadata_comment}</code>
+• <b>Comment:</b> <code>{metadata_comment}</code></blockquote>
 
 Configure advanced merge settings that will be used when user settings are not available."""
 
